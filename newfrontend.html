@@ -1,0 +1,2984 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8">
+    <style>
+      /* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================================
+   A4 PAGE SETTINGS
+========================================================= */
+
+@page {
+    size: A4 portrait;
+    margin: 0;
+}
+
+
+/* =========================================================
+   HTML / BODY
+========================================================= */
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: #475569;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 12px 0;
+}
+
+
+/* =========================================================
+   A4 PAGE
+========================================================= */
+
+.page {
+    position: relative;
+
+    width: 210mm;
+    height: 297mm;
+
+    min-width: 210mm;
+    min-height: 297mm;
+    max-width: 210mm;
+    max-height: 297mm;
+
+    background: #ffffff;
+
+    padding: 5mm 7mm 4mm 7mm;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: visible;
+
+    break-after: page;
+    page-break-after: always;
+
+    box-shadow: 0 8px 24px rgba(30, 41, 59, 0.35);
+}
+
+
+/* Last page should not force another page */
+.page:last-of-type {
+    break-after: auto;
+    page-break-after: auto;
+}
+
+
+/* =========================================================
+   DECORATIVE CORNERS
+========================================================= */
+
+.page::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 36px;
+    height: 36px;
+
+    background:
+        linear-gradient(
+            225deg,
+            #d97706 0%,
+            #d97706 8px,
+            transparent 8px
+        );
+
+    opacity: 0.9;
+
+    pointer-events: none;
+}
+
+
+.page::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 30px;
+    height: 30px;
+
+    background:
+        linear-gradient(
+            45deg,
+            #1e293b 0%,
+            #1e293b 7px,
+            transparent 7px
+        );
+
+    opacity: 0.75;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.doc-header {
+    width: 100%;
+
+    min-height: 43px;
+
+    flex: 0 0 auto;
+
+    border-bottom: 2px solid #1e293b;
+
+    padding-bottom: 3px;
+    margin-bottom: 3px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+    z-index: 2;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 1px;
+
+    min-width: 0;
+}
+
+.brand-logo-img {
+    height: 35px;
+
+    width: auto;
+
+    max-width: 220px;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+.branch-subtitle {
+    font-size: 6.5pt;
+
+    font-weight: 800;
+
+    color: #b45309;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    padding-left: 2px;
+}
+
+
+/* =========================================================
+   COUNTRY SECTION
+========================================================= */
+
+.brand-countries {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 5px;
+
+    flex-shrink: 0;
+}
+
+.country-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 3px;
+
+    font-size: 6.2pt;
+
+    font-weight: 800;
+
+    color: #334155;
+
+    letter-spacing: 0.15px;
+
+    white-space: nowrap;
+}
+
+.flag-icon {
+    width: 15px;
+    height: 10px;
+
+    display: inline-block;
+
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+
+    border-radius: 1px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   TABLE CONTAINER
+========================================================= */
+
+.table-container {
+    width: 100%;
+
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    display: flex;
+
+    border: 1px solid #1e293b;
+
+    background: #ffffff;
+
+    position: relative;
+
+    z-index: 1;
+
+    overflow: visible;
+}
+
+
+/* =========================================================
+   CATEGORY STRIP
+========================================================= */
+
+.category-strip {
+    width: 27px;
+
+    min-width: 27px;
+
+    flex: 0 0 27px;
+
+    border-right: 1px solid #1e293b;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fef9c3 0%,
+            #fef08a 100%
+        );
+
+    position: relative;
+}
+
+.category-strip::before {
+    content: "";
+
+    position: absolute;
+
+    left: 2px;
+
+    top: 6px;
+    bottom: 6px;
+
+    width: 2.5px;
+
+    background: #d97706;
+
+    border-radius: 1px;
+}
+
+.category-strip span {
+    writing-mode: vertical-rl;
+
+    transform: rotate(180deg);
+
+    text-transform: uppercase;
+
+    font-size: 7.5pt;
+
+    font-weight: 900;
+
+    letter-spacing: 1.2px;
+
+    color: #0f172a;
+
+    text-align: center;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   MAIN TABLE
+========================================================= */
+
+table.curriculum-table {
+    width: calc(100% - 27px);
+
+    flex: 1 1 auto;
+
+    border-collapse: collapse;
+
+    border-spacing: 0;
+
+    table-layout: fixed;
+
+    background: #ffffff;
+
+    height: auto;
+
+    margin: 0;
+
+    padding: 0;
+}
+
+
+/* =========================================================
+   TABLE CELLS
+========================================================= */
+
+table.curriculum-table th,
+table.curriculum-table td {
+    border: 1px solid #e2e8f0;
+
+    padding: 2px 3.5px;
+
+    vertical-align: middle;
+
+    word-wrap: break-word;
+
+    overflow-wrap: anywhere;
+
+    white-space: normal;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+table.curriculum-table th {
+    background:
+        linear-gradient(
+            180deg,
+            #fffbeb 0%,
+            #fef3c7 100%
+        );
+
+    font-weight: 800;
+
+    text-align: center;
+
+    height: 20px;
+
+    padding: 2px 3px;
+
+    line-height: 1.05;
+
+    color: #0f172a;
+
+    text-transform: uppercase;
+
+    font-size: 6.5pt;
+
+    border-bottom: 2px solid #d97706;
+
+    white-space: normal;
+}
+
+
+/* =========================================================
+   IMPORTANT:
+   DO NOT FORCE ROW HEIGHTS
+========================================================= */
+
+table.curriculum-table tbody tr {
+    height: auto;
+
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+
+/* =========================================================
+   ALTERNATE ROW
+========================================================= */
+
+table.curriculum-table tbody tr:nth-child(even) {
+    background: #fffdf5;
+}
+
+
+/* =========================================================
+   COLUMN WIDTHS
+========================================================= */
+
+/*
+   Total = 100%
+
+   Session     = 12%
+   Topic       = 26%
+   Subtopics   = 42%
+   Student Sig = 10%
+   Staff Sig   = 10%
+*/
+
+col.col-session {
+    width: 12%;
+}
+
+col.col-topic {
+    width: 26%;
+}
+
+col.col-subtopics {
+    width: 42%;
+}
+
+col.col-sig {
+    width: 10%;
+}
+
+
+/* =========================================================
+   SESSION COLUMN
+========================================================= */
+
+.td-session {
+    font-size: 7pt;
+
+    font-weight: 700;
+
+    text-align: center;
+
+    color: #b45309;
+
+    background: rgba(254, 243, 199, 0.3);
+
+    white-space: normal;
+}
+
+
+/* =========================================================
+   TOPIC COLUMN
+========================================================= */
+
+.td-topic {
+    font-size: 7pt;
+
+    font-weight: 700;
+
+    color: #0f172a;
+
+    line-height: 1.08;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   SUBTOPICS
+========================================================= */
+
+.td-subtopics {
+    line-height: 1.05;
+
+    vertical-align: middle;
+}
+
+
+/* =========================================================
+   SIGNATURE
+========================================================= */
+
+.td-sig {
+    text-align: center;
+
+    font-size: 6pt;
+
+    vertical-align: middle;
+
+    background: rgba(254, 252, 232, 0.35);
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   SUBTOPIC LIST
+========================================================= */
+
+ul.subtopics-list {
+    list-style: none;
+
+    padding: 0;
+
+    margin: 0;
+
+    width: 100%;
+}
+
+ul.subtopics-list li {
+    position: relative;
+
+    padding-left: 7px;
+
+    margin: 0 0 0.8px 0;
+
+    line-height: 1.05;
+
+    font-size: 6.35pt;
+
+    color: #334155;
+
+    word-break: normal;
+
+    overflow-wrap: anywhere;
+}
+
+ul.subtopics-list li:last-child {
+    margin-bottom: 0;
+}
+
+ul.subtopics-list li::before {
+    content: "•";
+
+    position: absolute;
+
+    left: 0;
+
+    font-weight: bold;
+
+    color: #d97706;
+
+    font-size: 6.8pt;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.doc-footer {
+    width: 100%;
+
+    flex: 0 0 auto;
+
+    border-top: 1px solid #1e293b;
+
+    padding-top: 2px;
+
+    margin-top: 2px;
+
+    text-align: center;
+
+    font-size: 6pt;
+
+    line-height: 1.1;
+
+    position: relative;
+
+    z-index: 2;
+
+    min-height: 18px;
+}
+
+
+/* =========================================================
+   FOOTER CONTACT
+========================================================= */
+
+.footer-contact-bar {
+    font-weight: 700;
+
+    color: #1e293b;
+
+    letter-spacing: 0.1px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: nowrap;
+
+    gap: 4px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   EMERGENCY TAG
+========================================================= */
+
+.emergency-tag {
+    font-size: 5.4pt;
+
+    font-weight: 800;
+
+    color: #dc2626;
+
+    background: #fee2e2;
+
+    border: 1px solid #fca5a5;
+
+    padding: 0 3px;
+
+    border-radius: 2px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   FOOTER URL
+========================================================= */
+
+.footer-url {
+    font-weight: 800;
+
+    color: #b45309;
+
+    text-decoration: underline;
+
+    margin-top: 1px;
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print {
+
+    html,
+    body {
+        width: 210mm;
+        min-width: 210mm;
+
+        margin: 0;
+        padding: 0;
+
+        background: #ffffff;
+    }
+
+    body {
+        display: block;
+    }
+
+    .page {
+        width: 210mm;
+        height: 297mm;
+
+        min-width: 210mm;
+        min-height: 297mm;
+
+        max-width: 210mm;
+        max-height: 297mm;
+
+        margin: 0;
+
+        padding: 5mm 7mm 4mm 7mm;
+
+        display: flex;
+
+        flex-direction: column;
+
+        background: #ffffff;
+
+        box-shadow: none;
+
+        overflow: visible;
+
+        break-after: page;
+
+        page-break-after: always;
+
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .page:last-of-type {
+        break-after: auto;
+        page-break-after: auto;
+    }
+
+    .table-container {
+        overflow: visible;
+    }
+
+    table.curriculum-table {
+        height: auto;
+
+        width: calc(100% - 27px);
+
+        table-layout: fixed;
+
+        border-collapse: collapse;
+    }
+
+    table.curriculum-table tbody tr {
+        height: auto;
+
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    table.curriculum-table th,
+    table.curriculum-table td {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+
+/* =========================================================
+   PDF / HEADLESS BROWSER SUPPORT
+========================================================= */
+
+@media screen {
+
+    .page {
+        margin-bottom: 12px;
+    }
+}
+
+
+/* =========================================================
+   PREVENT ACCIDENTAL PAGE BREAKS
+========================================================= */
+
+.doc-header,
+.doc-footer,
+.table-container,
+.category-strip {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+    </style>
+    <body>
+        <div class="page">
+    <div class="doc-header">
+      <div class="logo-container">
+        <!-- REPLACE LOGO PATH HERE -->
+        <img src="pumo-logo.png" alt="Pumo Technovation Logo" class="brand-logo-img" />
+        <span class="branch-subtitle">Marathahalli Branch</span>
+      </div>
+      <div class="brand-countries">
+        <div class="country-item"><svg class="flag-icon" viewBox="0 0 640 480"><path fill="#f93" d="M0 0h640v160H0z"/><path fill="#fff" d="M0 160h640v160H0z"/><path fill="#128807" d="M0 320h640v160H0z"/><circle cx="320" cy="240" r="40" fill="none" stroke="#008" stroke-width="8"/></svg> INDIA</div>
+        <div class="country-item"><svg class="flag-icon" viewBox="0 0 640 480"><path fill="#00732f" d="M0 0h640v160H0z"/><path fill="#fff" d="M0 160h640v160H0z"/><path fill="#000" d="M0 320h640v160H0z"/><path fill="#f00" d="M0 0h160v480H0z"/></svg> UAE</div>
+        <div class="country-item"><svg class="flag-icon" viewBox="0 0 640 480"><path fill="#c00" d="M0 0h640v480H0z"/><path fill="#fff" d="M0 34h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0z"/><path fill="#000066" d="M0 0h320v240H0z"/><circle cx="150" cy="120" r="70" fill="#fc0"/><circle cx="170" cy="120" r="60" fill="#000066"/></svg> MALAYSIA</div>
+        <div class="country-item"><svg class="flag-icon" viewBox="0 0 640 480"><path fill="#00008b" d="M0 0h640v480H0z"/><path fill="#fff" d="M0 0l240 180M240 0L0 180" stroke="#fff" stroke-width="24"/><path fill="#f00" d="M0 0l240 180M240 0L0 180" stroke="#f00" stroke-width="12"/><path fill="#fff" d="M120 0v240M0 120h320" stroke="#fff" stroke-width="40"/><path fill="#f00" d="M120 0v240M0 120h320" stroke="#f00" stroke-width="24"/><circle cx="480" cy="240" r="18" fill="#fff"/></svg> AUSTRALIA</div>
+      </div>
+    </div>
+    <div class="table-container">
+      <div class="category-strip"><span>HTML</span></div>
+      <table class="curriculum-table">
+        <colgroup>
+          <col class="col-session" />
+          <col class="col-topic" />
+          <col class="col-subtopics" />
+          <col class="col-sig" />
+          <col class="col-sig" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Sessions</th>
+            <th>Topics</th>
+            <th>Sub Topics</th>
+            <th>Student<br>signature</th>
+            <th>Staff<br>signature</th>
+          </tr>
+        </thead>
+        <!-- <tbody>
+          <tr>
+            <td class="td-session">Session 1</td>
+            <td class="td-topic">Introduction to Cybersecurity</td>
+            <td class="td-subtopics"><ul class="subtopics-list"><li>What is Cybersecurity? </li><li>Importance of digital protection </li><li>Real-world cybersecurity examples </li></ul></td>
+            <td class="td-sig"></td><td class="td-sig"></td>
+          </tr>
+          <tr>
+            <td class="td-session">Session 2</td>
+            <td class="td-topic">The CIA Triad</td>
+            <td class="td-subtopics"><ul class="subtopics-list"><li>Confidentiality </li><li>Integrity </li><li>Availability </li></ul></td>
+            <td class="td-sig"></td><td class="td-sig"></td>
+          </tr>
+          <tr>
+            <td class="td-session">Session 3</td>
+            <td class="td-topic">Types of Cyber Threats</td>
+            <td class="td-subtopics"><ul class="subtopics-list"><li>Malware attacks </li><li>Phishing techniques </li><li>Social engineering risks </li></ul></td>
+            <td class="td-sig"></td><td class="td-sig"></td>
+          </tr>
+          <tr>
+            <td class="td-session">Session 4</td>
+            <td class="td-topic">Security Principles</td>
+            <td class="td-subtopics"><ul class="subtopics-list"><li>Least Privilege </li><li>Defense in Depth </li><li>Zero Trust basics </li></ul></td>
+            <td class="td-sig"></td><td class="td-sig"></td>
+          </tr>
+          <tr>
+            <td class="td-session">Session 5</td>
+            <td class="td-topic">Security Domains Overview</td>
+            <td class="td-subtopics"><ul class="subtopics-list"><li>Network Security </li><li>Application Security </li><li>Identity & Access Management </li></ul></td>
+            <td class="td-sig"></td><td class="td-sig"></td>
+          </tr>
+          <tr>
+            <td class="td-session">Session 6</td>
+            <td class="td-topic">Cybersecurity Controls</td>
+            <td class="td-subtopics"><ul class="subtopics-list"><li>Administrative controls </li><li>Technical controls </li><li>Physical controls </li></ul></td>
+            <td class="td-sig"></td><td class="td-sig"></td>
+          </tr>
+          <tr>
+            <td class="td-session">Session 7</td>
+            <td class="td-topic">ISO 27001 Basics</td>
+            <td class="td-subtopics"><ul class="subtopics-list"><li>Understanding Annex A controls </li><li>ISMS components </li><li>Asset management basics </li></ul></td>
+            <td class="td-sig"></td><td class="td-sig"></td>
+          </tr>
+          <tr>
+            <td class="td-session">Session 8</td>
+            <td class="td-topic">NIST CSF Overview</td>
+            <td class="td-subtopics"><ul class="subtopics-list"><li>Identify → Protect → Detect → Respond → Recover </li><li>Framework core functions </li><li>Use cases in companies </li></ul></td>
+            <td class="td-sig"></td><td class="td-sig"></td>
+          </tr>
+          <tr>
+            <td class="td-session">Session 9</td>
+            <td class="td-topic">Introduction to SOC</td>
+            <td class="td-subtopics"><ul class="subtopics-list"><li>SOC roles and hierarchy </li><li>Types of alerts </li><li>Responsibilities of SOC analysts </li></ul></td>
+            <td class="td-sig"></td><td class="td-sig"></td>
+          </tr>
+          <tr>
+            <td class="td-session">Session 10</td>
+            <td class="td-topic">Risk Management Basics</td>
+            <td class="td-subtopics"><ul class="subtopics-list"><li>Threat vs vulnerability vs risk </li><li>Impact assessment </li><li>Risk mitigation strategies </li></ul></td>
+            <td class="td-sig"></td><td class="td-sig"></td>
+          </tr>
+        </tbody> -->
+        <tbody>
+  <tr>
+    <td class="td-session">Session 1</td>
+    <td class="td-topic">Introduction to HTML</td>
+    <td class="td-subtopics">
+      <ul class="subtopics-list">
+        <li>What is HTML?</li>
+        <li>History of HTML</li>
+        <li>HTML Versions</li>
+        <li>How Web Works?</li>
+        <li>Setting Up Environment (VS Code)</li>
+        <li>Your First HTML Page</li>
+      </ul>
+    </td>
+    <td class="td-sig"></td><td class="td-sig"></td>
+  </tr>
+
+  <tr>
+    <td class="td-session">Session 2</td>
+    <td class="td-topic">HTML Document Structure</td>
+    <td class="td-subtopics">
+      <ul class="subtopics-list">
+        <li>&lt;!DOCTYPE html&gt; Declaration</li>
+        <li>&lt;html&gt;, &lt;head&gt;, &lt;title&gt;</li>
+        <li>&lt;body&gt; Element</li>
+        <li>Character Set (meta charset)</li>
+        <li>Viewport Meta Tag</li>
+        <li>Comments in HTML</li>
+      </ul>
+    </td>
+    <td class="td-sig"></td><td class="td-sig"></td>
+  </tr>
+
+  <tr>
+    <td class="td-session">Session 3</td>
+    <td class="td-topic">HTML Elements &amp; Tags</td>
+    <td class="td-subtopics">
+      <ul class="subtopics-list">
+        <li>Elements vs Tags</li>
+        <li>Block vs Inline Elements</li>
+        <li>Void Elements</li>
+        <li>Nesting of Elements</li>
+        <li>Attributes</li>
+        <li>Global Attributes</li>
+      </ul>
+    </td>
+    <td class="td-sig"></td><td class="td-sig"></td>
+  </tr>
+
+  <tr>
+    <td class="td-session">Session 4</td>
+    <td class="td-topic">Headings, Paragraphs &amp; Text Formatting</td>
+    <td class="td-subtopics">
+      <ul class="subtopics-list">
+        <li>Headings &lt;h1&gt; to &lt;h6&gt;</li>
+        <li>Paragraphs &lt;p&gt;</li>
+        <li>Line Break &lt;br&gt;</li>
+        <li>Horizontal Rule &lt;hr&gt;</li>
+        <li>Text Formatting Tags</li>
+        <li>&lt;b&gt;, &lt;strong&gt;, &lt;i&gt;, &lt;em&gt;</li>
+        <li>&lt;mark&gt;, &lt;small&gt;, &lt;del&gt;, &lt;ins&gt;</li>
+      </ul>
+    </td>
+    <td class="td-sig"></td><td class="td-sig"></td>
+  </tr>
+
+  <tr>
+    <td class="td-session">Session 5</td>
+    <td class="td-topic">Lists</td>
+    <td class="td-subtopics">
+      <ul class="subtopics-list">
+        <li>Unordered List &lt;ul&gt;</li>
+        <li>Ordered List &lt;ol&gt;</li>
+        <li>List Items &lt;li&gt;</li>
+        <li>Nested Lists</li>
+        <li>Description List &lt;dl&gt;</li>
+        <li>Description Term &lt;dt&gt;</li>
+        <li>Description Details &lt;dd&gt;</li>
+      </ul>
+    </td>
+    <td class="td-sig"></td><td class="td-sig"></td>
+  </tr>
+
+  <tr>
+    <td class="td-session">Session 6</td>
+    <td class="td-topic">Links &amp; Navigation</td>
+    <td class="td-subtopics">
+      <ul class="subtopics-list">
+        <li>Anchor Tag &lt;a&gt;</li>
+        <li>href Attribute</li>
+        <li>Open Links in New Tab</li>
+        <li>Navigation Menus</li>
+        <li>Email Links</li>
+        <li>Internal Page Linking</li>
+        <li>External Page Linking</li>
+      </ul>
+    </td>
+    <td class="td-sig"></td><td class="td-sig"></td>
+  </tr>
+
+  <tr>
+    <td class="td-session">Session 7</td>
+    <td class="td-topic">Images &amp; Media</td>
+    <td class="td-subtopics">
+      <ul class="subtopics-list">
+        <li>Image Tag &lt;img&gt;</li>
+        <li>src, alt, width, height Attributes</li>
+        <li>Image Formats</li>
+        <li>Figure and Figcaption</li>
+        <li>Audio Tag &lt;audio&gt;</li>
+        <li>Video Tag &lt;video&gt;</li>
+        <li>Audio and Video Controls</li>
+      </ul>
+    </td>
+    <td class="td-sig"></td><td class="td-sig"></td>
+  </tr>
+
+  <tr>
+    <td class="td-session">Session 8</td>
+    <td class="td-topic">Tables</td>
+    <td class="td-subtopics">
+      <ul class="subtopics-list">
+        <li>Table Structure &lt;table&gt;</li>
+        <li>Table Row &lt;tr&gt;</li>
+        <li>Table Heading &lt;th&gt;</li>
+        <li>Table Data &lt;td&gt;</li>
+        <li>Table Caption &lt;caption&gt;</li>
+        <li>Colspan &amp; Rowspan</li>
+        <li>Table Styling (Basics)</li>
+      </ul>
+    </td>
+    <td class="td-sig"></td><td class="td-sig"></td>
+  </tr>
+
+  <tr>
+    <td class="td-session">Session 9</td>
+    <td class="td-topic">Forms</td>
+    <td class="td-subtopics">
+      <ul class="subtopics-list">
+        <li>Form Tag &lt;form&gt;</li>
+        <li>Input Types</li>
+        <li>Text, Password, Email, Number</li>
+        <li>Checkbox, Radio, Date</li>
+        <li>Text Area &lt;textarea&gt;</li>
+        <li>Select Dropdown &lt;select&gt;</li>
+        <li>Button Types (Submit, Reset, Button)</li>
+        <li>Label Tag &lt;label&gt;</li>
+        <li>Form Validation (Basics)</li>
+      </ul>
+    </td>
+    <td class="td-sig"></td><td class="td-sig"></td>
+  </tr>
+
+  <tr>
+    <td class="td-session">Session 10</td>
+    <td class="td-topic">Semantic HTML</td>
+    <td class="td-subtopics">
+      <ul class="subtopics-list">
+        <li>What is Semantic HTML?</li>
+        <li>Semantic Elements</li>
+        <li>&lt;header&gt;, &lt;nav&gt;, &lt;main&gt;</li>
+        <li>&lt;section&gt;, &lt;article&gt;, &lt;aside&gt;</li>
+        <li>&lt;footer&gt;</li>
+        <li>Benefits of Semantic HTML</li>
+        <li>Semantic vs Non-Semantic Elements</li>
+      </ul>
+    </td>
+    <td class="td-sig"></td><td class="td-sig"></td>
+  </tr>
+</tbody>
+      </table>
+    </div>
+    <div class="doc-footer">
+      <div class="footer-contact-bar">
+        <span><strong>PUMO Technovation Marathahalli</strong></span>
+        <span>|</span>
+        <span>Staff Ph.No: <strong>+91 9113610764</strong></span>
+        <span>|</span>
+        <span>  MD Ph.No [ Dr. Somshekar ]: <strong>+91 8050065472</strong> <span class="emergency-tag">Only for Emergency</span></span>
+      </div>
+      <div class="footer-url">www.pumotechnovation.com </div>
+    </div>
+  </div>
+
+  <!-- =====================================================CSS================================================= -->
+    <div class="page">
+  <div class="doc-header">
+    <div class="logo-container">
+      <!-- REPLACE LOGO PATH HERE -->
+      <img src="pumo-logo.png" alt="Pumo Technovation Logo" class="brand-logo-img" />
+      <span class="branch-subtitle">Marathahalli Branch</span>
+    </div>
+
+    <div class="brand-countries">
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#f93" d="M0 0h640v160H0z"/>
+          <path fill="#fff" d="M0 160h640v160H0z"/>
+          <path fill="#128807" d="M0 320h640v160H0z"/>
+          <circle cx="320" cy="240" r="40" fill="none" stroke="#008" stroke-width="8"/>
+        </svg>
+        INDIA
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#00732f" d="M0 0h640v160H0z"/>
+          <path fill="#fff" d="M0 160h640v160H0z"/>
+          <path fill="#000" d="M0 320h640v160H0z"/>
+          <path fill="#f00" d="M0 0h160v480H0z"/>
+        </svg>
+        UAE
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#c00" d="M0 0h640v480H0z"/>
+          <path fill="#fff" d="M0 34h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0z"/>
+          <path fill="#000066" d="M0 0h320v240H0z"/>
+          <circle cx="150" cy="120" r="70" fill="#fc0"/>
+          <circle cx="170" cy="120" r="60" fill="#000066"/>
+        </svg>
+        MALAYSIA
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#00008b" d="M0 0h640v480H0z"/>
+          <path fill="#fff" d="M0 0l240 180M240 0L0 180" stroke="#fff" stroke-width="24"/>
+          <path fill="#f00" d="M0 0l240 180M240 0L0 180" stroke="#f00" stroke-width="12"/>
+          <path fill="#fff" d="M120 0v240M0 120h320" stroke="#fff" stroke-width="40"/>
+          <path fill="#f00" d="M120 0v240M0 120h320" stroke="#f00" stroke-width="24"/>
+          <circle cx="480" cy="240" r="18" fill="#fff"/>
+        </svg>
+        AUSTRALIA
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+
+    <div class="category-strip">
+      <span>CSS</span>
+    </div>
+
+    <table class="curriculum-table">
+
+      <colgroup>
+        <col class="col-session" />
+        <col class="col-topic" />
+        <col class="col-subtopics" />
+        <col class="col-sig" />
+        <col class="col-sig" />
+      </colgroup>
+
+      <thead>
+        <tr>
+          <th>Sessions</th>
+          <th>Topics</th>
+          <th>Sub Topics</th>
+          <th>Student<br>signature</th>
+          <th>Staff<br>signature</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <!-- SESSION 1 -->
+        <tr>
+          <td class="td-session">Session 11</td>
+
+          <td class="td-topic">
+            Introduction to CSS
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>What is CSS?</li>
+              <li>How CSS Works</li>
+              <li>CSS Syntax</li>
+              <li>Ways to Add CSS</li>
+              <li>CSS Selectors</li>
+              <li>Comments in CSS</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+
+        <!-- SESSION 2 -->
+        <tr>
+          <td class="td-session">Session 12</td>
+
+          <td class="td-topic">
+            CSS Selectors
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Type Selector</li>
+              <li>Class Selector</li>
+              <li>ID Selector</li>
+              <li>Universal Selector</li>
+              <li>Group Selector</li>
+              <li>Combinators</li>
+              <li>Descendant Combinator</li>
+              <li>Child Combinator</li>
+              <li>Adjacent Sibling</li>
+              <li>General Sibling</li>
+              <li>Pseudo-classes</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+
+        <!-- SESSION 3 -->
+        <tr>
+          <td class="td-session">Session 13</td>
+
+          <td class="td-topic">
+            Colors &amp; Backgrounds
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Color Values</li>
+              <li>Background Color</li>
+              <li>Background Image</li>
+              <li>Background Repeat</li>
+              <li>Background Position</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+
+        <!-- SESSION 4 -->
+        <tr>
+          <td class="td-session">Session 14</td>
+
+          <td class="td-topic">
+            Text &amp; Fonts
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Font Family</li>
+              <li>Font Size</li>
+              <li>Font Weight &amp; Style</li>
+              <li>Text Color</li>
+              <li>Text Alignment</li>
+              <li>Text Decoration</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+
+        <!-- SESSION 5 -->
+        <tr>
+          <td class="td-session">Session 15</td>
+
+          <td class="td-topic">
+            CSS Box Model
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Content</li>
+              <li>Padding</li>
+              <li>Border</li>
+              <li>Margin</li>
+              <li>Width &amp; Height</li>
+              <li>Box Model Example</li>
+              <li>Outline</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+
+        <!-- SESSION 6 -->
+        <tr>
+          <td class="td-session">Session 16</td>
+
+          <td class="td-topic">
+            Lists &amp; Tables
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Styling Lists</li>
+              <li>List Style Types</li>
+              <li>Removing List Styles</li>
+              <li>Styling Tables</li>
+              <li>Border Collapse</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+
+        <!-- SESSION 7 -->
+        <tr>
+          <td class="td-session">Session 17</td>
+
+          <td class="td-topic">
+            Layout &amp; Display
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Display Property</li>
+              <li>Block vs Inline vs Inline-block</li>
+              <li>Visibility</li>
+              <li>Float &amp; Clear</li>
+              <li>Position</li>
+              <li>Z-index</li>
+              <li>Overflow</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+
+        <!-- SESSION 8 -->
+        <tr>
+          <td class="td-session">Session 18</td>
+
+          <td class="td-topic">
+            Flexbox Layout
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>What is Flexbox?</li>
+              <li>Flex Container Properties</li>
+              <li>display</li>
+              <li>flex-direction</li>
+              <li>justify-content</li>
+              <li>align-items</li>
+              <li>flex-wrap</li>
+              <li>Flex Item Properties</li>
+              <li>order</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+
+        <!-- SESSION 9 -->
+        <tr>
+          <td class="td-session">Session 19</td>
+
+          <td class="td-topic">
+            Responsive Design
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Media Queries</li>
+              <li>Breakpoints</li>
+              <li>Mobile-First Approach</li>
+              <li>Responsive Images</li>
+              <li>Responsive Navigation</li>
+              <li>Responsive Layouts</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+
+        <!-- SESSION 10 -->
+        <tr>
+          <td class="td-session">Session 20</td>
+
+          <td class="td-topic">
+            Transitions, Animations &amp; Pseudo Classes/Elements
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>CSS Transitions</li>
+              <li>Transition Properties</li>
+              <li>Transition Timing</li>
+              <li>CSS Animations</li>
+              <li>@keyframes Rule</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="doc-footer">
+
+    <div class="footer-contact-bar">
+      <span><strong>PUMO Technovation Marathahalli</strong></span>
+      <span>|</span>
+      <span>Staff Ph.No: <strong>+91 9113610764</strong></span>
+      <span>|</span>
+      <span>
+        MD Ph.No [ Dr. Somshekar ]:
+        <strong>+91 8050065472</strong>
+        <span class="emergency-tag">Only for Emergency</span>
+      </span>
+    </div>
+
+    <div class="footer-url">
+      www.pumotechnovation.com
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ============================================Tailwind CSS/Bootstrap============================================ -->
+  <div class="page">
+  <div class="doc-header">
+    <div class="logo-container">
+      <!-- REPLACE LOGO PATH HERE -->
+      <img src="pumo-logo.png" alt="Pumo Technovation Logo" class="brand-logo-img" />
+      <span class="branch-subtitle">Marathahalli Branch</span>
+    </div>
+
+    <div class="brand-countries">
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#f93" d="M0 0h640v160H0z"/>
+          <path fill="#fff" d="M0 160h640v160H0z"/>
+          <path fill="#128807" d="M0 320h640v160H0z"/>
+          <circle cx="320" cy="240" r="40" fill="none" stroke="#008" stroke-width="8"/>
+        </svg>
+        INDIA
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#00732f" d="M0 0h640v160H0z"/>
+          <path fill="#fff" d="M0 160h640v160H0z"/>
+          <path fill="#000" d="M0 320h640v160H0z"/>
+          <path fill="#f00" d="M0 0h160v480H0z"/>
+        </svg>
+        UAE
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#c00" d="M0 0h640v480H0z"/>
+          <path fill="#fff" d="M0 34h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0z"/>
+          <path fill="#000066" d="M0 0h320v240H0z"/>
+          <circle cx="150" cy="120" r="70" fill="#fc0"/>
+          <circle cx="170" cy="120" r="60" fill="#000066"/>
+        </svg>
+        MALAYSIA
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#00008b" d="M0 0h640v480H0z"/>
+          <path fill="#fff" d="M0 0l240 180M240 0L0 180" stroke="#fff" stroke-width="24"/>
+          <path fill="#f00" d="M0 0l240 180M240 0L0 180" stroke="#f00" stroke-width="12"/>
+          <path fill="#fff" d="M120 0v240M0 120h320" stroke="#fff" stroke-width="40"/>
+          <path fill="#f00" d="M120 0v240M0 120h320" stroke="#f00" stroke-width="24"/>
+          <circle cx="480" cy="240" r="18" fill="#fff"/>
+        </svg>
+        AUSTRALIA
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+
+    <div class="category-strip">
+      <span>Bootstrap / Tailwind CSS</span>
+    </div>
+
+    <table class="curriculum-table">
+
+      <colgroup>
+        <col class="col-session" />
+        <col class="col-topic" />
+        <col class="col-subtopics" />
+        <col class="col-sig" />
+        <col class="col-sig" />
+      </colgroup>
+
+      <thead>
+        <tr>
+          <th>Sessions</th>
+          <th>Topics</th>
+          <th>Sub Topics</th>
+          <th>Student<br>signature</th>
+          <th>Staff<br>signature</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <!-- SESSION 21 -->
+        <tr>
+          <td class="td-session">Session 21</td>
+
+          <td class="td-topic">
+            Introduction & Grid System
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>What is Bootstrap?</li>
+              <li>CDN, Download & Setup</li>
+              <li>Container, Row & Columns</li>
+              <li>Grid Breakpoints</li>
+              <li>Responsive Grid System</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 22 -->
+        <tr>
+          <td class="td-session">Session 22</td>
+
+          <td class="td-topic">
+            Typography, Colors & Utilities
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Typography Classes</li>
+              <li>Text & Background Colors</li>
+              <li>Utility Classes</li>
+              <li>Spacing Utilities</li>
+              <li>Responsive Utilities</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 23 -->
+        <tr>
+          <td class="td-session">Session 23</td>
+
+          <td class="td-topic">
+            Buttons, Badges, Forms & Navigation
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Button Styles & Sizes</li>
+              <li>Badges & Pills</li>
+              <li>Form Controls</li>
+              <li>Form Layouts & Validation</li>
+              <li>Navbar Components</li>
+              <li>Tabs, Pills & Breadcrumbs</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 24 -->
+        <tr>
+          <td class="td-session">Session 24</td>
+
+          <td class="td-topic">
+            Cards, Components, Modals & Tooltips
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Card Components</li>
+              <li>Card Groups & Layouts</li>
+              <li>Alerts & Progress Bars</li>
+              <li>Spinners & List Groups</li>
+              <li>Modals</li>
+              <li>Tooltips & Popovers</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 25 -->
+        <tr>
+          <td class="td-session">Session 25</td>
+
+          <td class="td-topic">
+            Responsive Design & Project
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Responsive Design Best Practices</li>
+              <li>Bootstrap Utility Classes</li>
+              <li>Responsive Components</li>
+              <li>Building a Complete Responsive Website</li>
+              <li>Real-World Bootstrap Project</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 26 -->
+        <tr>
+          <td class="td-session">Session 26</td>
+
+          <td class="td-topic">
+            Introduction & Utility-First Workflow
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>What is Tailwind CSS?</li>
+              <li>CDN, Installation & Setup</li>
+              <li>Utility-First CSS</li>
+              <li>Understanding Utility Classes</li>
+              <li>Building Your First UI</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 27 -->
+        <tr>
+          <td class="td-session">Session 27</td>
+
+          <td class="td-topic">
+            Layout, Spacing & Typography
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Margin & Padding</li>
+              <li>Width, Height, Max/Min</li>
+              <li>Flexbox Basics</li>
+              <li>Font Size, Weight & Family</li>
+              <li>Text Alignment & Decoration</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 28 -->
+        <tr>
+          <td class="td-session">Session 28</td>
+
+          <td class="td-topic">
+            Colors, Backgrounds, Borders & Effects
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Text & Background Colors</li>
+              <li>Opacity & Gradients</li>
+              <li>Border Utilities</li>
+              <li>Shadows</li>
+              <li>Blur & Visual Effects</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 29 -->
+        <tr>
+          <td class="td-session">Session 29</td>
+
+          <td class="td-topic">
+            Flexbox, Grid, Components & Responsive Design
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Flexbox Utilities</li>
+              <li>CSS Grid Utilities</li>
+              <li>Buttons & Alerts</li>
+              <li>Tables & Badges</li>
+              <li>Responsive Breakpoints</li>
+              <li>Responsive Utilities</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 30 -->
+        <tr>
+          <td class="td-session">Session 30</td>
+
+          <td class="td-topic">
+            Advanced Responsive Design & Project
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Advanced Utility Classes</li>
+              <li>Responsive Layout Design</li>
+              <li>Component-Based UI</li>
+              <li>Creating Modern UI Designs</li>
+              <li>Real-World Tailwind CSS Project</li>
+              <li>Build a Complete Responsive Website</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="doc-footer">
+
+    <div class="footer-contact-bar">
+      <span><strong>PUMO Technovation Marathahalli</strong></span>
+      <span>|</span>
+      <span>Staff Ph.No: <strong>+91 9113610764</strong></span>
+      <span>|</span>
+      <span>
+        MD Ph.No [ Dr. Somshekar ]:
+        <strong>+91 8050065472</strong>
+        <span class="emergency-tag">Only for Emergency</span>
+      </span>
+    </div>
+
+    <div class="footer-url">
+      www.pumotechnovation.com
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ======================================Javascript Part 1========================================= -->
+ <div class="page">
+  <div class="doc-header">
+    <div class="logo-container">
+      <!-- REPLACE LOGO PATH HERE -->
+      <img src="pumo-logo.png" alt="Pumo Technovation Logo" class="brand-logo-img" />
+      <span class="branch-subtitle">Marathahalli Branch</span>
+    </div>
+
+    <div class="brand-countries">
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#f93" d="M0 0h640v160H0z"/>
+          <path fill="#fff" d="M0 160h640v160H0z"/>
+          <path fill="#128807" d="M0 320h640v160H0z"/>
+          <circle cx="320" cy="240" r="40" fill="none" stroke="#008" stroke-width="8"/>
+        </svg>
+        INDIA
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#00732f" d="M0 0h640v160H0z"/>
+          <path fill="#fff" d="M0 160h640v160H0z"/>
+          <path fill="#000" d="M0 320h640v160H0z"/>
+          <path fill="#f00" d="M0 0h160v480H0z"/>
+        </svg>
+        UAE
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#c00" d="M0 0h640v480H0z"/>
+          <path fill="#fff" d="M0 34h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0z"/>
+          <path fill="#000066" d="M0 0h320v240H0z"/>
+          <circle cx="150" cy="120" r="70" fill="#fc0"/>
+          <circle cx="170" cy="120" r="60" fill="#000066"/>
+        </svg>
+        MALAYSIA
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#00008b" d="M0 0h640v480H0z"/>
+          <path fill="#fff" d="M0 0l240 180M240 0L0 180" stroke="#fff" stroke-width="24"/>
+          <path fill="#f00" d="M0 0l240 180M240 0L0 180" stroke="#f00" stroke-width="12"/>
+          <path fill="#fff" d="M120 0v240M0 120h320" stroke="#fff" stroke-width="40"/>
+          <path fill="#f00" d="M120 0v240M0 120h320" stroke="#f00" stroke-width="24"/>
+          <circle cx="480" cy="240" r="18" fill="#fff"/>
+        </svg>
+        AUSTRALIA
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+
+    <div class="category-strip">
+      <span>JavaScript</span>
+    </div>
+
+    <table class="curriculum-table">
+
+      <colgroup>
+        <col class="col-session" />
+        <col class="col-topic" />
+        <col class="col-subtopics" />
+        <col class="col-sig" />
+        <col class="col-sig" />
+      </colgroup>
+
+      <thead>
+        <tr>
+          <th>Sessions</th>
+          <th>Topics</th>
+          <th>Sub Topics</th>
+          <th>Student<br>signature</th>
+          <th>Staff<br>signature</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <!-- SESSION 1 -->
+        <tr>
+          <td class="td-session">Session 31</td>
+          <td class="td-topic">Introduction to JavaScript</td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>What is JavaScript?</li>
+              <li>History of JavaScript</li>
+              <li>JavaScript vs Java</li>
+              <li>Features of JavaScript</li>
+              <li>How JavaScript Works?</li>
+              <li>Setting Up Environment</li>
+              <li>Your First JavaScript Program</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 2 -->
+        <tr>
+          <td class="td-session">Session 32</td>
+          <td class="td-topic">JavaScript Basics</td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Variables: var, let, const</li>
+              <li>Data Types</li>
+              <li>Operators</li>
+              <li>Type Conversion</li>
+              <li>Comments</li>
+              <li>String Literals</li>
+              <li>Template Literals</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 3 -->
+        <tr>
+          <td class="td-session">Session 33</td>
+          <td class="td-topic">Control Flow</td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>if Statement</li>
+              <li>if...else Statement</li>
+              <li>else if Ladder</li>
+              <li>switch Statement</li>
+              <li>Ternary Operator</li>
+              <li>break</li>
+              <li>continue</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 4 -->
+        <tr>
+          <td class="td-session">Session 34</td>
+          <td class="td-topic">Loops</td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>for Loop</li>
+              <li>while Loop</li>
+              <li>do...while Loop</li>
+              <li>Loop Control</li>
+              <li>break and continue</li>
+              <li>Nested Loops</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 5 -->
+        <tr>
+          <td class="td-session">Session 35</td>
+          <td class="td-topic">Functions</td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Function Declaration</li>
+              <li>Function Expression</li>
+              <li>Arrow Functions</li>
+              <li>Parameters &amp; Arguments</li>
+              <li>Default Parameters</li>
+              <li>Rest Parameters</li>
+              <li>Return Statement</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 6 -->
+        <tr>
+          <td class="td-session">Session 36</td>
+          <td class="td-topic">Scope &amp; Closures</td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Global Scope</li>
+              <li>Function Scope</li>
+              <li>Block Scope</li>
+              <li>Scope Chain</li>
+              <li>Closures</li>
+              <li>Practical Closure Examples</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 7 -->
+        <tr>
+          <td class="td-session">Session 37</td>
+          <td class="td-topic">Arrays</td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Creating Arrays</li>
+              <li>Accessing Elements</li>
+              <li>Array Methods</li>
+              <li>push(), pop(), shift(), unshift()</li>
+              <li>splice(), slice()</li>
+              <li>forEach()</li>
+              <li>map()</li>
+              <li>filter()</li>
+              <li>reduce()</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 8 -->
+        <tr>
+          <td class="td-session">Session 38</td>
+          <td class="td-topic">Advanced Arrays</td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Array Destructuring</li>
+              <li>Multi-dimensional Arrays</li>
+              <li>Searching Arrays</li>
+              <li>Sorting Arrays</li>
+              <li>Iterating Arrays</li>
+              <li>Practical Array Problems</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 9 -->
+        <tr>
+          <td class="td-session">Session 39</td>
+          <td class="td-topic">Objects</td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Creating Objects</li>
+              <li>Accessing Properties</li>
+              <li>Adding Properties</li>
+              <li>Updating Properties</li>
+              <li>Deleting Properties</li>
+              <li>this Keyword</li>
+              <li>Object Methods</li>
+              <li>Nested Objects</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 10 -->
+        <tr>
+          <td class="td-session">Session 40</td>
+          <td class="td-topic">Object Destructuring &amp; Advanced Objects</td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Object Destructuring</li>
+              <li>Nested Object Destructuring</li>
+              <li>Object Methods</li>
+              <li>Property Shorthand</li>
+              <li>Computed Properties</li>
+              <li>Working with Nested Objects</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="doc-footer">
+
+    <div class="footer-contact-bar">
+      <span><strong>PUMO Technovation Marathahalli</strong></span>
+      <span>|</span>
+      <span>Staff Ph.No: <strong>+91 9113610764</strong></span>
+      <span>|</span>
+      <span>
+        MD Ph.No [ Dr. Somshekar ]:
+        <strong>+91 8050065472</strong>
+        <span class="emergency-tag">Only for Emergency</span>
+      </span>
+    </div>
+
+    <div class="footer-url">
+      www.pumotechnovation.com
+    </div>
+
+  </div>
+</div>
+
+<!-- ======================================Javascript Part 2================================================= -->
+  <div class="page">
+  <div class="doc-header">
+    <div class="logo-container">
+      <!-- REPLACE LOGO PATH HERE -->
+      <img src="pumo-logo.png" alt="Pumo Technovation Logo" class="brand-logo-img" />
+      <span class="branch-subtitle">Marathahalli Branch</span>
+    </div>
+
+    <div class="brand-countries">
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#f93" d="M0 0h640v160H0z"/>
+          <path fill="#fff" d="M0 160h640v160H0z"/>
+          <path fill="#128807" d="M0 320h640v160H0z"/>
+          <circle cx="320" cy="240" r="40" fill="none" stroke="#008" stroke-width="8"/>
+        </svg>
+        INDIA
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#00732f" d="M0 0h640v160H0z"/>
+          <path fill="#fff" d="M0 160h640v160H0z"/>
+          <path fill="#000" d="M0 320h640v160H0z"/>
+          <path fill="#f00" d="M0 0h160v480H0z"/>
+        </svg>
+        UAE
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#c00" d="M0 0h640v480H0z"/>
+          <path fill="#fff" d="M0 34h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0z"/>
+          <path fill="#000066" d="M0 0h320v240H0z"/>
+          <circle cx="150" cy="120" r="70" fill="#fc0"/>
+          <circle cx="170" cy="120" r="60" fill="#000066"/>
+        </svg>
+        MALAYSIA
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#00008b" d="M0 0h640v480H0z"/>
+          <path fill="#fff" d="M0 0l240 180M240 0L0 180" stroke="#fff" stroke-width="24"/>
+          <path fill="#f00" d="M0 0l240 180M240 0L0 180" stroke="#f00" stroke-width="12"/>
+          <path fill="#fff" d="M120 0v240M0 120h320" stroke="#fff" stroke-width="40"/>
+          <path fill="#f00" d="M120 0v240M0 120h320" stroke="#f00" stroke-width="24"/>
+          <circle cx="480" cy="240" r="18" fill="#fff"/>
+        </svg>
+        AUSTRALIA
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+
+    <div class="category-strip">
+      <span>JavaScript</span>
+    </div>
+
+    <table class="curriculum-table">
+
+      <colgroup>
+        <col class="col-session" />
+        <col class="col-topic" />
+        <col class="col-subtopics" />
+        <col class="col-sig" />
+        <col class="col-sig" />
+      </colgroup>
+
+      <thead>
+        <tr>
+          <th>Sessions</th>
+          <th>Topics</th>
+          <th>Sub Topics</th>
+          <th>Student<br>signature</th>
+          <th>Staff<br>signature</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <!-- SESSION 11 -->
+        <tr>
+          <td class="td-session">Session 41</td>
+          <td class="td-topic">
+            DOM Manipulation
+          </td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>What is DOM?</li>
+              <li>Selecting Elements</li>
+              <li>Changing Content</li>
+              <li>Changing Styles</li>
+              <li>Creating Elements</li>
+              <li>Adding Elements</li>
+              <li>Removing Elements</li>
+              <li>Traversing the DOM</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 12 -->
+        <tr>
+          <td class="td-session">Session 42</td>
+          <td class="td-topic">
+            Events
+          </td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Event Types</li>
+              <li>Event Listener</li>
+              <li>Mouse Events</li>
+              <li>Keyboard Events</li>
+              <li>Form Events</li>
+              <li>Event Object</li>
+              <li>Event Delegation</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 13 -->
+        <tr>
+          <td class="td-session">Session 43</td>
+          <td class="td-topic">
+            BOM (Browser Object Model)
+          </td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Window Object</li>
+              <li>Navigator Object</li>
+              <li>Screen Object</li>
+              <li>Location Object</li>
+              <li>History Object</li>
+              <li>alert(), confirm(), prompt()</li>
+              <li>localStorage &amp; sessionStorage</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 14 -->
+        <tr>
+          <td class="td-session">Session 44</td>
+          <td class="td-topic">
+            Asynchronous JavaScript
+          </td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Synchronous vs Asynchronous JavaScript</li>
+              <li>Callbacks</li>
+              <li>Callback Hell</li>
+              <li>Promises</li>
+              <li>.then(), .catch(), .finally()</li>
+              <li>async / await</li>
+              <li>Error Handling</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 15 -->
+        <tr>
+          <td class="td-session">Session 45</td>
+          <td class="td-topic">
+            ES6+ Features
+          </td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>let &amp; const</li>
+              <li>Arrow Functions</li>
+              <li>Template Literals</li>
+              <li>Destructuring</li>
+              <li>Spread Operator</li>
+              <li>Rest Operator</li>
+              <li>Enhanced Object Literals</li>
+              <li>Default Parameters</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 16 -->
+        <tr>
+          <td class="td-session">Session 46</td>
+          <td class="td-topic">
+            Modern JavaScript Modules &amp; Operators
+          </td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Modules</li>
+              <li>import &amp; export</li>
+              <li>Classes</li>
+              <li>Optional Chaining (?.)</li>
+              <li>Nullish Coalescing (??)</li>
+              <li>Modern JavaScript Syntax</li>
+              <li>Working with ES6 Modules</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 17 -->
+        <tr>
+          <td class="td-session">Session 47</td>
+          <td class="td-topic">
+            Form Validation
+          </td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Input Validation</li>
+              <li>Email Validation</li>
+              <li>Password Validation</li>
+              <li>Phone Number Validation</li>
+              <li>Real-time Validation</li>
+              <li>Form Submission</li>
+              <li>Prevent Default Behavior</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 18 -->
+        <tr>
+          <td class="td-session">Session 48</td>
+          <td class="td-topic">
+            JSON &amp; Error Handling
+          </td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>What is JSON?</li>
+              <li>JSON Syntax</li>
+              <li>JSON.parse()</li>
+              <li>JSON.stringify()</li>
+              <li>Working with JSON Data</li>
+              <li>try, catch, finally</li>
+              <li>throw Statement</li>
+              <li>Custom Errors</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 19 -->
+        <tr>
+          <td class="td-session">Session 49</td>
+          <td class="td-topic">
+            Debugging &amp; Advanced JavaScript
+          </td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>console.log()</li>
+              <li>console.warn()</li>
+              <li>console.error()</li>
+              <li>Debugging in Browser</li>
+              <li>IIFE (Immediately Invoked Function Expression)</li>
+              <li>Hoisting</li>
+              <li>Prototypes &amp; Inheritance</li>
+              <li>call(), apply(), bind()</li>
+              <li>Debouncing &amp; Throttling</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 20 -->
+        <tr>
+          <td class="td-session">Session 50</td>
+          <td class="td-topic">
+            Practice &amp; Projects
+          </td>
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Practice All Concepts</li>
+              <li>To-Do List App</li>
+              <li>Calculator</li>
+              <li>Quiz App</li>
+              <li>Image Slider</li>
+              <li>Weather App</li>
+              <li>Final Project: Complete Web App</li>
+            </ul>
+          </td>
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="doc-footer">
+
+    <div class="footer-contact-bar">
+      <span><strong>PUMO Technovation Marathahalli</strong></span>
+      <span>|</span>
+      <span>Staff Ph.No: <strong>+91 9113610764</strong></span>
+      <span>|</span>
+      <span>
+        MD Ph.No [ Dr. Somshekar ]:
+        <strong>+91 8050065472</strong>
+        <span class="emergency-tag">Only for Emergency</span>
+      </span>
+    </div>
+
+    <div class="footer-url">
+      www.pumotechnovation.com
+    </div>
+
+  </div>
+</div>
+
+<!-- ===============================================React part 1===================================== -->
+ <div class="page">
+  <div class="doc-header">
+    <div class="logo-container">
+      <!-- REPLACE LOGO PATH HERE -->
+      <img src="pumo-logo.png" alt="Pumo Technovation Logo" class="brand-logo-img" />
+      <span class="branch-subtitle">Marathahalli Branch</span>
+    </div>
+
+    <div class="brand-countries">
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#f93" d="M0 0h640v160H0z"/>
+          <path fill="#fff" d="M0 160h640v160H0z"/>
+          <path fill="#128807" d="M0 320h640v160H0z"/>
+          <circle cx="320" cy="240" r="40" fill="none" stroke="#008" stroke-width="8"/>
+        </svg>
+        INDIA
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#00732f" d="M0 0h640v160H0z"/>
+          <path fill="#fff" d="M0 160h640v160H0z"/>
+          <path fill="#000" d="M0 320h640v160H0z"/>
+          <path fill="#f00" d="M0 0h160v480H0z"/>
+        </svg>
+        UAE
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#c00" d="M0 0h640v480H0z"/>
+          <path fill="#fff" d="M0 34h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0z"/>
+          <path fill="#000066" d="M0 0h320v240H0z"/>
+          <circle cx="150" cy="120" r="70" fill="#fc0"/>
+          <circle cx="170" cy="120" r="60" fill="#000066"/>
+        </svg>
+        MALAYSIA
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#00008b" d="M0 0h640v480H0z"/>
+          <path fill="#fff" d="M0 0l240 180M240 0L0 180" stroke="#fff" stroke-width="24"/>
+          <path fill="#f00" d="M0 0l240 180M240 0L0 180" stroke="#f00" stroke-width="12"/>
+          <path fill="#fff" d="M120 0v240M0 120h320" stroke="#fff" stroke-width="40"/>
+          <path fill="#f00" d="M120 0v240M0 120h320" stroke="#f00" stroke-width="24"/>
+          <circle cx="480" cy="240" r="18" fill="#fff"/>
+        </svg>
+        AUSTRALIA
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+
+    <div class="category-strip">
+      <span>React.js + Vite</span>
+    </div>
+
+    <table class="curriculum-table">
+
+      <colgroup>
+        <col class="col-session" />
+        <col class="col-topic" />
+        <col class="col-subtopics" />
+        <col class="col-sig" />
+        <col class="col-sig" />
+      </colgroup>
+
+      <thead>
+        <tr>
+          <th>Sessions</th>
+          <th>Topics</th>
+          <th>Sub Topics</th>
+          <th>Student<br>signature</th>
+          <th>Staff<br>signature</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <!-- SESSION 1 -->
+        <tr>
+          <td class="td-session">Session 51</td>
+
+          <td class="td-topic">
+            Introduction to Vite & React
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>What is Vite?</li>
+              <li>Why Vite over Create React App?</li>
+              <li>What is React.js?</li>
+              <li>Features of React</li>
+              <li>React vs Other Libraries</li>
+              <li>Setting Up Environment</li>
+              <li>Course Roadmap</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 2 -->
+        <tr>
+          <td class="td-session">Session 52</td>
+
+          <td class="td-topic">
+            Setting Up Vite Project
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Installing Node.js</li>
+              <li>Creating Project with Vite</li>
+              <li>Project Structure Explained</li>
+              <li>npm Scripts in Vite</li>
+              <li>Working with Assets</li>
+              <li>Running the Development Server</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 3 -->
+        <tr>
+          <td class="td-session">Session 53</td>
+
+          <td class="td-topic">
+            React Basics
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>JSX Syntax</li>
+              <li>Rendering Elements</li>
+              <li>Components</li>
+              <li>Functional Components</li>
+              <li>Component Composition</li>
+              <li>Export & Import</li>
+              <li>Default vs Named Export</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 4 -->
+        <tr>
+          <td class="td-session">Session 54</td>
+
+          <td class="td-topic">
+            JSX & Rendering
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>What is JSX?</li>
+              <li>Embedding Expressions</li>
+              <li>JSX Attributes</li>
+              <li>Conditional Rendering</li>
+              <li>Lists & Keys</li>
+              <li>Fragments (&lt;&gt;...&lt;/&gt;)</li>
+              <li>Rendering Multiple Elements</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 5 -->
+        <tr>
+          <td class="td-session">Session 55</td>
+
+          <td class="td-topic">
+            Components Deep Dive
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Component Types</li>
+              <li>Reusability</li>
+              <li>Props Basics</li>
+              <li>Passing Props</li>
+              <li>Default Props</li>
+              <li>Prop Types with TypeScript Support</li>
+              <li>Children Props</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 6 -->
+        <tr>
+          <td class="td-session">Session 56</td>
+
+          <td class="td-topic">
+            State Management with useState
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>What is State?</li>
+              <li>useState Hook</li>
+              <li>Updating State</li>
+              <li>Multiple State Variables</li>
+              <li>State with Objects & Arrays</li>
+              <li>Controlled Components</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 7 -->
+        <tr>
+          <td class="td-session">Session 57</td>
+
+          <td class="td-topic">
+            Event Handling
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Handling Events</li>
+              <li>Passing Arguments</li>
+              <li>Event Object</li>
+              <li>Prevent Default</li>
+              <li>Form Events</li>
+              <li>onChange</li>
+              <li>onClick</li>
+              <li>onSubmit</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 8 -->
+        <tr>
+          <td class="td-session">Session 58</td>
+
+          <td class="td-topic">
+            Effects & Lifecycle
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>useEffect Hook</li>
+              <li>Component Lifecycle in Functional Components</li>
+              <li>useEffect with Dependencies</li>
+              <li>Cleanup in useEffect</li>
+              <li>Common Use Cases</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="doc-footer">
+
+    <div class="footer-contact-bar">
+      <span><strong>PUMO Technovation Marathahalli</strong></span>
+      <span>|</span>
+      <span>Staff Ph.No: <strong>+91 9113610764</strong></span>
+      <span>|</span>
+      <span>
+        MD Ph.No [ Dr. Somshekar ]:
+        <strong>+91 8050065472</strong>
+        <span class="emergency-tag">Only for Emergency</span>
+      </span>
+    </div>
+
+    <div class="footer-url">
+      www.pumotechnovation.com
+    </div>
+
+  </div>
+</div>
+
+<!-- ===========================================React part 2===================================== -->
+ <div class="page">
+  <div class="doc-header">
+    <div class="logo-container">
+      <!-- REPLACE LOGO PATH HERE -->
+      <img src="pumo-logo.png" alt="Pumo Technovation Logo" class="brand-logo-img" />
+      <span class="branch-subtitle">Marathahalli Branch</span>
+    </div>
+
+    <div class="brand-countries">
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#f93" d="M0 0h640v160H0z"/>
+          <path fill="#fff" d="M0 160h640v160H0z"/>
+          <path fill="#128807" d="M0 320h640v160H0z"/>
+          <circle cx="320" cy="240" r="40" fill="none" stroke="#008" stroke-width="8"/>
+        </svg>
+        INDIA
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#00732f" d="M0 0h640v160H0z"/>
+          <path fill="#fff" d="M0 160h640v160H0z"/>
+          <path fill="#000" d="M0 320h640v160H0z"/>
+          <path fill="#f00" d="M0 0h160v480H0z"/>
+        </svg>
+        UAE
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#c00" d="M0 0h640v480H0z"/>
+          <path fill="#fff" d="M0 34h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0zm0 68h640v34H0z"/>
+          <path fill="#000066" d="M0 0h320v240H0z"/>
+          <circle cx="150" cy="120" r="70" fill="#fc0"/>
+          <circle cx="170" cy="120" r="60" fill="#000066"/>
+        </svg>
+        MALAYSIA
+      </div>
+
+      <div class="country-item">
+        <svg class="flag-icon" viewBox="0 0 640 480">
+          <path fill="#00008b" d="M0 0h640v480H0z"/>
+          <path fill="#fff" d="M0 0l240 180M240 0L0 180" stroke="#fff" stroke-width="24"/>
+          <path fill="#f00" d="M0 0l240 180M240 0L0 180" stroke="#f00" stroke-width="12"/>
+          <path fill="#fff" d="M120 0v240M0 120h320" stroke="#fff" stroke-width="40"/>
+          <path fill="#f00" d="M120 0v240M0 120h320" stroke="#f00" stroke-width="24"/>
+          <circle cx="480" cy="240" r="18" fill="#fff"/>
+        </svg>
+        AUSTRALIA
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+
+    <div class="category-strip">
+      <span>React.js + Vite</span>
+    </div>
+
+    <table class="curriculum-table">
+
+      <colgroup>
+        <col class="col-session" />
+        <col class="col-topic" />
+        <col class="col-subtopics" />
+        <col class="col-sig" />
+        <col class="col-sig" />
+      </colgroup>
+
+      <thead>
+        <tr>
+          <th>Sessions</th>
+          <th>Topics</th>
+          <th>Sub Topics</th>
+          <th>Student<br>signature</th>
+          <th>Staff<br>signature</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <!-- SESSION 9 -->
+        <tr>
+          <td class="td-session">Session 59</td>
+
+          <td class="td-topic">
+            Hooks in React
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>What are Hooks?</li>
+              <li>useState Recap</li>
+              <li>useEffect Recap</li>
+              <li>useRef</li>
+              <li>useMemo</li>
+              <li>useCallback</li>
+              <li>Custom Hooks</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 10 -->
+        <tr>
+          <td class="td-session">Session 60</td>
+
+          <td class="td-topic">
+            Conditional Rendering
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>if-else Statements</li>
+              <li>Ternary Operator</li>
+              <li>Logical &amp;&amp; Operator</li>
+              <li>switch Statements</li>
+              <li>Rendering Nothing (null)</li>
+              <li>Guard Clauses</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 11 -->
+        <tr>
+          <td class="td-session">Session 61</td>
+
+          <td class="td-topic">
+            Lists &amp; Keys
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Rendering Lists</li>
+              <li>map() Function</li>
+              <li>Keys in Lists</li>
+              <li>Unique Keys</li>
+              <li>Index as Key — When to Avoid</li>
+              <li>Dynamic Lists</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 12 -->
+        <tr>
+          <td class="td-session">Session 62</td>
+
+          <td class="td-topic">
+            Routing with React Router
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Installing React Router</li>
+              <li>BrowserRouter</li>
+              <li>Routes &amp; Route</li>
+              <li>Link &amp; NavLink</li>
+              <li>Nested Routes</li>
+              <li>Active Links</li>
+              <li>404 Page / Not Found</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 13 -->
+        <tr>
+          <td class="td-session">Session 63</td>
+
+          <td class="td-topic">
+            Form Handling
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Controlled Components</li>
+              <li>Form Input Handling</li>
+              <li>useState with Forms</li>
+              <li>Form Validation</li>
+              <li>Multi-field Forms</li>
+              <li>Form Submission</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 14 -->
+        <tr>
+          <td class="td-session">Session 64</td>
+
+          <td class="td-topic">
+            Context API
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>What is Context API?</li>
+              <li>Creating Context</li>
+              <li>Provider &amp; Consumer</li>
+              <li>useContext Hook</li>
+              <li>Passing Data Deeply Without Prop Drilling</li>
+              <li>Practical Example</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 15 -->
+        <tr>
+          <td class="td-session">Session 65</td>
+
+          <td class="td-topic">
+            Vite Advanced Features
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Environment Variables</li>
+              <li>Aliases (Path Resolution)</li>
+              <li>Vite Plugins</li>
+              <li>Build for Production</li>
+              <li>Preview Build</li>
+              <li>Deployment (Netlify / Vercel)</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+        <!-- SESSION 16 -->
+        <tr>
+          <td class="td-session">Session 66</td>
+
+          <td class="td-topic">
+            Practice &amp; Projects
+          </td>
+
+          <td class="td-subtopics">
+            <ul class="subtopics-list">
+              <li>Mini Project — To-Do App</li>
+              <li>Mini Project — Quiz App</li>
+              <li>Mini Project — Weather App</li>
+              <li>Mini Project — Blog Card</li>
+              <li>Project Planning &amp; Component Structure</li>
+              <li>Final Project — Full Featured Web App</li>
+            </ul>
+          </td>
+
+          <td class="td-sig"></td>
+          <td class="td-sig"></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="doc-footer">
+
+    <div class="footer-contact-bar">
+      <span><strong>PUMO Technovation Marathahalli</strong></span>
+      <span>|</span>
+      <span>Staff Ph.No: <strong>+91 9113610764</strong></span>
+      <span>|</span>
+      <span>
+        MD Ph.No [ Dr. Somshekar ]:
+        <strong>+91 8050065472</strong>
+        <span class="emergency-tag">Only for Emergency</span>
+      </span>
+    </div>
+
+    <div class="footer-url">
+      www.pumotechnovation.com
+    </div>
+
+  </div>
+</div>
+    </body>
+    </html>
